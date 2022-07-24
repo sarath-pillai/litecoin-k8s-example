@@ -16,7 +16,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: litecoin
-        image: sarathp88/litecoin:0.18.1
+        image: sarathp88/litecoin:IMAGE_TAG_TO_BE_REPLACED_BY_JENKINS
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - name: data
