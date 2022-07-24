@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: litecoin
+spec:
+  selector:
+    matchLabels:
+      app: litecoin
+  serviceName: "litecoin"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: litecoin
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: litecoin
+        image: sarathp88/litecoin:0.18.1
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: data
+          mountPath: "/home/litecoin/data"
+        resources:
+          requests:
+            memory: 256Mi
+          limits:
+            cpu: 1.0
+            memory: 512Mi
+        readinessProbe:
+          tcpSocket:
+            port: 9333
+          initialDelaySeconds: 30
+          timeoutSeconds: 5
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: standard
+      resources:
+        requests:
+          storage: 5Gi
