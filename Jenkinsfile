@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Deploy to k8s') {
             steps {
-                sh "sed -i -e s/IMAGE_TAG_TO_BE_REPLACED_BY_JENKINS/$GIT_COMMIT/g k8s/statefulset.yaml && kubectl apply -f k8s/"
+                sh "sed -i -e s/IMAGE_TAG_TO_BE_REPLACED_BY_JENKINS/$GIT_COMMIT/g k8s/statefulset.yaml && kubectl apply -f k8s/statefulset.yaml"
             }
         }
    }
