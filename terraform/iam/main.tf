@@ -53,7 +53,7 @@ resource "aws_iam_group_membership" "group-membership" {
     "${aws_iam_user.user.name}"
   ]
 
-  group = "${aws_iam_group.group.name}"
+  group = aws_iam_group.group.name
 }
 
 
